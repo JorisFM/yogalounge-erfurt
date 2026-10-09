@@ -71,28 +71,30 @@ const tageText = kurs.termine.length
     line-height: 1.45;
   }
   .card__foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1rem;
+    display: grid;
+    gap: 0.6rem;
     margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid var(--linie);
     font-size: 0.9rem;
   }
+  /* Sieben Punkte füllen immer genau die Kartenbreite und schrumpfen bei Bedarf. */
   .card__days {
     display: flex;
-    gap: 0.2rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.15rem;
+    min-height: 1.75rem;
   }
   .card__day {
-    display: inline-grid;
+    flex: 0 1 1.75rem;
+    min-width: 0;
+    aspect-ratio: 1;
+    display: grid;
     place-items: center;
-    width: 1.75rem;
-    height: 1.75rem;
     padding-top: 0.12rem;
     border-radius: 50%;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--tinte-3);
     opacity: 0.55;
@@ -103,10 +105,14 @@ const tageText = kurs.termine.length
     opacity: 1;
   }
   .card__days--text {
+    justify-content: start;
     font-weight: 600;
     color: var(--tinte-2);
   }
   .card__dauer {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--tinte-3);
   }
 </style>

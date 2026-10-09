@@ -125,10 +125,10 @@ export const kurse: Kurs[] = [
   },
   {
     slug: 'krankenkassen-basiskurs',
-    name: 'Basiskurs mit der Krankenkasse',
+    name: 'Krankenkassen-Basiskurs',
     kurz: 'Zertifizierter Kurs, den deine Krankenkasse ganz oder teilweise bezahlt.',
     gruppe: 'einstieg',
-    dauer: 'geschlossener Kurs, mehrere Wochen',
+    dauer: 'mehrere Wochen',
     fuer: 'Einsteiger',
     bild: kasse,
     bildAlt: 'Vorbereiteter Yogaraum mit Matten und Sitzkissen',
