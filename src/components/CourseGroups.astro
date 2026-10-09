@@ -1,0 +1,65 @@
+---
+import CourseCard from './CourseCard.astro';
+import { kurse, gruppen, type Gruppe } from '../data/kurse';
+
+const reihenfolge: Gruppe[] = ['einstieg', 'fluss', 'familie', 'mehr'];
+---
+
+{
+  reihenfolge.map((g) => (
+    <div class="group" id={g}>
+      <div class="group__head">
+        <h3 class="group__title">{gruppen[g].titel}</h3>
+        <p class="muted">{gruppen[g].text}</p>
+      </div>
+      <ul class="group__cards">
+        {kurse
+          .filter((k) => k.gruppe === g)
+          .map((k) => (
+            <li>
+              <CourseCard kurs={k} />
+            </li>
+          ))}
+      </ul>
+    </div>
+  ))
+}
+
+<style>
+  /* ---------- Kursgruppen ---------- */
+  .group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 4fr);
+    gap: var(--space-m);
+    padding-block: var(--space-m) var(--space-l);
+    border-top: 2px solid var(--tinte);
+  }
+  .group:last-child {
+    padding-block-end: 0;
+  }
+  .group__head {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+  .group__title {
+    font-size: var(--step-2);
+  }
+  .group__head p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .group__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  @media (max-width: 900px) {
+    .group {
+      grid-template-columns: 1fr;
+    }
+  }
+
+</style>

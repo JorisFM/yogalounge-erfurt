@@ -1,0 +1,33 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  stand?: string;
+}
+const { title, description, stand } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <PageHero label="Rechtliches" title={title} />
+  <section class="section">
+    <div class="wrap">
+      <div class="prose legal">
+        <slot />
+        {stand && <p class="muted legal__stand">Stand: {stand}</p>}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal :global(h2:first-child) {
+    margin-block-start: 0;
+  }
+  .legal__stand {
+    margin-block-start: 3em;
+    font-size: 0.95rem;
+  }
+</style>

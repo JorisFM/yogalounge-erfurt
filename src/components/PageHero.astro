@@ -1,0 +1,42 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  lead?: string;
+}
+const { label, title, lead } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="wrap page-hero__inner">
+    <p class="label page-hero__label">{label}</p>
+    <h1 set:html={title} />
+    {lead && <p class="page-hero__lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    background: var(--safran);
+    padding-block: clamp(3rem, 2rem + 5vw, 6.5rem) clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  }
+  .page-hero__inner {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+  }
+  .page-hero h1 {
+    max-width: 16ch;
+    font-size: var(--step-5);
+    hyphens: auto;
+  }
+  .page-hero__lead {
+    max-width: 40rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+  .page-hero :global(.btn-row) {
+    margin-top: 0.75rem;
+  }
+</style>

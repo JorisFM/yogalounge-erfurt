@@ -1,0 +1,232 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import { kurse, gruppen, tage, type Kurs } from '../../data/kurse';
+import { bsport, site } from '../../data/site';
+import { u } from '../../lib/url';
+
+export function getStaticPaths() {
+  return kurse.map((kurs) => ({ params: { slug: kurs.slug }, props: { kurs } }));
+}
+
+interface Props {
+  kurs: Kurs;
+}
+const { kurs } = Astro.props;
+const buchung = kurs.buchung
+  ? { label: kurs.buchung.label, href: bsport[kurs.buchung.href as keyof typeof bsport] }
+  : { label: 'Im Kursplan buchen', href: bsport.kalender };
+const verwandt = kurse.filter((k) => k.gruppe === kurs.gruppe && k.slug !== kurs.slug).slice(0, 3);
+const andere = verwandt.length >= 2 ? verwandt : [...verwandt, ...kurse.filter((k) => k.gruppe === 'einstieg' && k.slug !== kurs.slug)].slice(0, 3);
+---
+
+<Base title={`${kurs.name} in Erfurt`} description={`${kurs.kurz} ${kurs.name} in der YogaLounge Erfurt, Neuwerkstraße 31.`}>
+  <PageHero label={gruppen[kurs.gruppe].titel} title={kurs.name} lead={kurs.kurz}>
+    <div class="btn-row">
+      <a class="btn" href={buchung.href} target="_blank" rel="noopener">
+        {buchung.label} <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn--ghost" href={u('/kurse/')}>Alle Kurse</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap detail">
+      <div class="detail__text prose">
+        {kurs.text.map((t) => <p>{t}</p>)}
+        {
+          kurs.slug !== 'klangmassage' && (
+            <p>
+              Du warst noch nie bei uns? Deine erste Stunde ist kostenlos. Wähle beim Buchen die Option
+              „Gratisprobestunde“. Was du mitbringen solltest, steht auf der Seite{' '}
+              <a href={u('/erste-stunde/')}>Deine erste Stunde</a>.
+            </p>
+          )
+        }
+      </div>
+
+      <aside class="facts-card" aria-label="Auf einen Blick">
+        <div class="media facts-card__img">
+          <Image src={kurs.bild} alt={kurs.bildAlt} widths={[400, 640]} sizes="(max-width: 900px) 100vw, 26rem" />
+        </div>
+        <dl class="facts-card__list">
+          <div>
+            <dt class="label">Dauer</dt>
+            <dd>{kurs.dauer}</dd>
+          </div>
+          <div>
+            <dt class="label">Für</dt>
+            <dd>{kurs.fuer}</dd>
+          </div>
+          <div>
+            <dt class="label">Wann</dt>
+            <dd>
+              {
+                kurs.termine.length > 0 ? (
+                  <ul class="termine">
+                    {kurs.termine.map((t) => (
+                      <li>
+                        <span class="termine__tag">{tage[t.tag]}</span>
+                        <span class="termine__zeit num">
+                          {t.von}–{t.bis}
+                        </span>
+                        {t.zusatz && <span class="termine__zusatz">{t.zusatz}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{kurs.termineHinweis}</p>
+                )
+              }
+            </dd>
+          </div>
+          {
+            kurs.mitPreisen && (
+              <div>
+                <dt class="label">Preis</dt>
+                <dd>
+                  Einzelstunde 25 €, 10er-Karte 185 €.{' '}
+                  <a class="textlink" href={u('/preise/')}>
+                    Alle Preise
+                  </a>
+                </dd>
+              </div>
+            )
+          }
+          {
+            kurs.slug === 'yoga-im-luisenpark' && (
+              <div>
+                <dt class="label">Preis</dt>
+                <dd>Spende vor Ort</dd>
+              </div>
+            )
+          }
+        </dl>
+        <p class="facts-card__help">
+          Fragen? <a href={site.phoneHref}>{site.phone}</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  {
+    andere.length > 0 && (
+      <section class="section section--stuck section--tight" aria-labelledby="mehr-titel">
+        <div class="wrap">
+          <h2 id="mehr-titel" class="more-title">
+            Das könnte dich auch interessieren
+          </h2>
+          <ul class="more-grid">
+            {andere.map((k) => (
+              <li>
+                <CourseCard kurs={k} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 26rem;
+    gap: var(--space-l);
+    align-items: start;
+  }
+  .detail__text {
+    font-size: var(--step-1);
+    line-height: 1.6;
+  }
+  .detail__text p:first-child {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.35;
+    font-weight: 500;
+    hyphens: manual;
+  }
+  .facts-card {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    display: grid;
+    gap: 1.25rem;
+    padding: 1rem 1rem 1.5rem;
+    border-radius: var(--radius-l);
+    background: var(--weiss);
+    border: 1px solid var(--linie);
+  }
+  .facts-card__img {
+    aspect-ratio: 3 / 2;
+    border-radius: calc(var(--radius-l) - 6px);
+  }
+  .facts-card__list {
+    display: grid;
+    gap: 1rem;
+    padding-inline: 0.5rem;
+  }
+  .facts-card__list > div {
+    display: grid;
+    gap: 0.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--linie);
+  }
+  .facts-card__list dt {
+    color: var(--safran-tief);
+    font-size: 0.78rem;
+  }
+  .facts-card__list dd {
+    font-size: 1.05rem;
+  }
+  .termine {
+    display: grid;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+  }
+  .termine li {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    column-gap: 0.75rem;
+  }
+  .termine__tag {
+    font-weight: 600;
+  }
+  .termine__zusatz {
+    grid-column: 2;
+    font-size: 0.9rem;
+    color: var(--tinte-2);
+    line-height: 1.3;
+  }
+  .facts-card__help {
+    padding-inline: 0.5rem;
+    font-size: 0.98rem;
+    color: var(--tinte-2);
+  }
+  .facts-card__help a {
+    font-weight: 600;
+    color: var(--tinte);
+  }
+  .more-title {
+    font-size: var(--step-3);
+    margin-block-end: var(--space-m);
+  }
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  @media (max-width: 900px) {
+    .detail {
+      grid-template-columns: 1fr;
+    }
+    .facts-card {
+      position: static;
+    }
+  }
+</style>

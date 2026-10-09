@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+import { u } from '../lib/url';
+import raum from '../assets/img/raum-erker.jpg';
+---
+
+<Base
+  title="Yoga für Unternehmen"
+  description="Betriebliche Gesundheitsförderung mit der YogaLounge Erfurt: Yoga, Achtsamkeit und Stressbewältigung für Teams in Thüringen, vor Ort oder im Studio. Förderung nach § 20 SGB V möglich."
+>
+  <PageHero
+    label="Für Unternehmen"
+    title="Yoga für Ihr Team"
+    lead="Wir bringen Yoga, Achtsamkeit und Stressbewältigung in Thüringer Unternehmen. Bei Ihnen vor Ort oder in unserem Studio in der Erfurter Altstadt."
+  >
+    <div class="btn-row">
+      <a class="btn" href={`mailto:${site.email}?subject=Yoga%20f%C3%BCr%20Unternehmen`}>
+        Erstgespräch anfragen <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn--ghost" href={site.phoneHref}>{site.phone}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Betriebliche Gesundheitsförderung</p>
+          <h2>Was wir anbieten</h2>
+        </div>
+        <div class="cols__body">
+          <p class="lead">
+            In vielen mittelständischen Betrieben tragen wenige Menschen viel Verantwortung. Wer dort vorbeugend etwas für
+            Körper und Kopf tut, bleibt länger gesund.
+          </p>
+          <ul class="dots">
+            <li>Yoga- und Entspannungskurse bei Ihnen oder bei uns im Studio</li>
+            <li>Achtsamkeitstraining und Stressbewältigung</li>
+            <li>Workshops und Impulse für Teamtage und Gesundheitstage</li>
+            <li>Programme, die auf Ihre Branche und Ihre Leute zugeschnitten sind</li>
+            <li>Unterstützung bei der Förderung nach § 20 SGB V über die Krankenkassen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Ablauf</p>
+          <h2>So entsteht Ihr Angebot</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Wir beginnen mit einem Erstgespräch, gern bei Ihnen vor Ort. Dabei klären wir, was Ihr Team braucht, wie viel
+            Zeit im Arbeitsalltag realistisch ist und wo geübt wird. Danach bekommen Sie ein Angebot, das zu Ihrer
+            Unternehmenskultur passt.
+          </p>
+          <p>
+            Schreiben Sie an <a href={`mailto:${site.email}`}>{site.email}</a> oder rufen Sie Kathrin Seemann an:{' '}
+            <a href={site.phoneHref}>{site.phone}</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Räume</p>
+          <h2>Teamtag im Studio</h2>
+        </div>
+        <div class="cols__body">
+          <div class="media biz-img">
+            <Image src={raum} alt="Großer Yogaraum mit Erker und Kronleuchter" widths={[640, 1000]} sizes="(max-width: 860px) 100vw, 44rem" />
+          </div>
+          <p>
+            Für Workshops und Teamtage stehen bis zu vier Yogaräume für bis zu 40 Personen bereit, dazu eine Küche mit
+            Lounge, Beamer und Flipchart. Mehr dazu unter <a href={u("/raeume-mieten/")}>Räume mieten</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .biz-img {
+    aspect-ratio: 16 / 9;
+  }
+</style>

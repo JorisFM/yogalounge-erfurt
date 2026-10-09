@@ -1,0 +1,198 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { u } from '../lib/url';
+import erker from '../assets/img/raum-erker.jpg';
+import matten from '../assets/img/raum-matten-2.jpg';
+import haus from '../assets/img/haus-neuwerkstrasse.jpg';
+import stillleben from '../assets/img/stillleben.jpg';
+import karma from '../assets/img/karma-kinder.jpg';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Das Studio"
+  description="Die YogaLounge Erfurt: 330 m² im Altbau an der Neuwerkstraße 31, vier Yogaräume mit Holzboden, Massage- und Coachingraum, Yogashop und Handpan-Showroom."
+>
+  <PageHero
+    label="Das Studio"
+    title="Vier Räume, hohe Decken, Holzboden."
+    lead="Die YogaLounge ist das größte Yogastudio in Erfurt: 330 Quadratmeter in einem Altbau an der Neuwerkstraße, mitten in der Altstadt."
+  />
+
+  <section class="section section--tight">
+    <div class="wrap photo-row">
+      <div class="media">
+        <Image src={erker} alt="Yogaraum mit Erker, Kronleuchter und hohen Fenstern" widths={[640, 960, 1400]} sizes="(max-width: 700px) 100vw, 60vw" loading="eager" />
+      </div>
+      <div class="media">
+        <Image src={matten} alt="Yogaraum mit Fischgrätparkett und vorbereiteten Matten" widths={[480, 800]} sizes="(max-width: 700px) 100vw, 40vw" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Wer wir sind</p>
+          <h2>Ein Ort zum Üben, ohne Leistungsdruck</h2>
+        </div>
+        <div class="cols__body">
+          <p class="lead">
+            Bei uns unterrichten verschiedene Lehrende verschiedene Stile, von ruhigem Hatha bis Ashtanga am Morgen. Dazu
+            kommen Klang, Meditation, Workshops und Coaching.
+          </p>
+          <p>
+            Gegründet hat die YogaLounge Kathrin Seemann. Am 8. Februar 2020 hat sie am Juri-Gagarin-Ring eröffnet, heute
+            sind wir in der Neuwerkstraße 31. Rund 2.500 Menschen üben inzwischen regelmäßig bei uns.
+          </p>
+          <p>
+            Kathrin wollte einen Ort, an dem man zusammenkommt, Yoga erlebt und sich weiterentwickeln kann. Perfektion war
+            dabei von Anfang an ausgeschlossen.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Die Räume</p>
+          <h2>Was du bei uns findest</h2>
+        </div>
+        <div class="cols__body">
+          <ul class="dots">
+            <li>Vier helle Yogaräume mit Holzboden, zwischen 30 und 45 m² groß</li>
+            <li>Einen Massageraum und einen Coachingraum</li>
+            <li>Einen kleinen Yogashop und den Handpan-Showroom von Handpan World</li>
+            <li>Eine Küche mit Loungebereich und Sitzpodest</li>
+            <li>Umkleiden, Spinde und Toiletten</li>
+          </ul>
+          <p>
+            Matten, Blöcke, Gurte, Bolster, Decken und Sitzkissen liegen für dich bereit. Getränke gibt es den ganzen Tag.
+            Deine eigene Matte kannst du natürlich mitbringen.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--ghost btn--small" href={u('/raeume-mieten/')}>Räume mieten</a>
+            <a class="btn btn--ghost btn--small" href={u('/erste-stunde/')}>Studioregeln</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Lage</p>
+          <h2>{site.street}</h2>
+        </div>
+        <div class="cols__body place">
+          <div class="media place__img">
+            <Image src={haus} alt="Eckhaus an der Neuwerkstraße mit der YogaLounge im Erdgeschoss" widths={[480, 800]} sizes="(max-width: 860px) 100vw, 20rem" />
+          </div>
+          <div>
+            <p>
+              Die Straßenbahn Linie 4 hält am Karl-Marx-Platz, direkt gegenüber. Vom Anger läufst du durch die Altstadt
+              bis zum Hirschgarten und folgst dann der Neuwerkstraße bis zur Nummer 31.
+            </p>
+            <p>
+              <a class="more" href={u('/kontakt/')}>Anfahrt und Karte <span aria-hidden="true">→</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stuck">
+    <div class="wrap">
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Gemeinsam wirken</p>
+          <h2>Karma Kinder Indien e.V.</h2>
+        </div>
+        <div class="cols__body place">
+          <div class="media place__img">
+            <Image src={karma} alt="Eine Gruppe lachender Kinder in Indien" widths={[480, 800]} sizes="(max-width: 860px) 100vw, 20rem" />
+          </div>
+          <div>
+            <p>
+              Der Verein unterstützt Familien, Dörfer und Gemeinden in Indien. Kinder sollen lernen dürfen, medizinisch
+              versorgt werden und sicher aufwachsen. Wir unterstützen den Verein und freuen uns über jede Spende.
+            </p>
+            <p>
+              <a class="more" href="https://www.paypal.com/donate/?hosted_button_id=XRLHNVYTU99QY" target="_blank" rel="noopener">
+                Spenden über PayPal <span aria-hidden="true">→</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap studio-more">
+      <a class="studio-more__item" href={u('/team/')}>
+        <span class="label">Team</span>
+        <span class="studio-more__title display">Wer bei uns unterrichtet</span>
+      </a>
+      <a class="studio-more__item" href={u('/unternehmen/')}>
+        <span class="label">Für Unternehmen</span>
+        <span class="studio-more__title display">Yoga für Ihr Team</span>
+      </a>
+      <a class="studio-more__item" href={u('/zusammenarbeit/')}>
+        <span class="label">Mitmachen</span>
+        <span class="studio-more__title display">Jobs und Partner</span>
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .place {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .place > div + div > * + * {
+    margin-top: 1em;
+  }
+  .place__img {
+    aspect-ratio: 1;
+  }
+  @media (max-width: 600px) {
+    .place {
+      grid-template-columns: 1fr;
+    }
+    .place__img {
+      aspect-ratio: 16 / 10;
+    }
+  }
+  .studio-more {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .studio-more__item {
+    display: grid;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-top: 2px solid var(--tinte);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .studio-more__item:hover {
+    background: var(--stuck);
+  }
+  .studio-more__item .label {
+    color: var(--safran-tief);
+  }
+  .studio-more__title {
+    font-size: var(--step-2);
+  }
+  @media (max-width: 760px) {
+    .studio-more {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

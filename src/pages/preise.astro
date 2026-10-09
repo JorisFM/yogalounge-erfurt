@@ -1,0 +1,392 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { bsport, site } from '../data/site';
+import { u } from '../lib/url';
+
+const karten = [
+  { name: 'Einzelticket', detail: '1 Stunde à 90 Minuten', preis: '25 €' },
+  { name: '5er-Karte', detail: '5 Stunden à 90 Minuten', preis: '125 €' },
+  { name: '10er-Karte', detail: '10 Stunden à 90 Minuten', preis: '185 €', hinweis: 'beliebt' },
+  { name: '10er-Karte Short', detail: '10 Stunden à 60 Minuten', preis: '145 €' },
+  { name: 'Kurskarte', detail: 'zertifizierter Krankenkassen-Kurs', preis: '150 €' },
+];
+
+const abos = [
+  {
+    name: 'Monatsmitgliedschaft',
+    preis: '65 €',
+    einheit: 'pro Monat',
+    punkte: ['4 Stunden pro Monat', '12 Monate Mindestlaufzeit'],
+  },
+  {
+    name: 'Halbjahres-Abo',
+    preis: '149 €',
+    einheit: 'pro Monat',
+    punkte: ['so oft du willst', '6 Monate Mindestlaufzeit'],
+    hervor: true,
+  },
+  {
+    name: 'Jahresmitgliedschaft',
+    preis: '750 €',
+    einheit: 'pro Jahr',
+    punkte: ['5 Stunden pro Monat', '12 Monate Laufzeit'],
+  },
+];
+
+const einzeln = [
+  { name: 'Yogamassage', detail: '60 Minuten, Termin nach Absprache', preis: '85 €' },
+  { name: 'Personal Yoga', detail: '60 Minuten, eine Person', preis: '100 €' },
+  { name: 'Personal Yoga zu zweit', detail: '60 Minuten, mit Partnerin oder Partner', preis: '130 €' },
+  { name: 'Personal Yoga Short', detail: '30 Minuten, eine Person', preis: '55 €' },
+];
+---
+
+<Base
+  title="Preise und Karten"
+  description="Preise der YogaLounge Erfurt: Einzelticket 25 €, 10er-Karte 185 €, Mitgliedschaften ab 65 € im Monat. Erste Stunde kostenlos, Krankenkassen-Kurse und Gutscheine."
+>
+  <PageHero
+    label="Preise"
+    title="Was Yoga bei uns kostet"
+    lead="Deine erste Stunde ist kostenlos. Danach entscheidest du, ob du mit Karte übst oder mit einer Mitgliedschaft regelmäßig kommst. Gekauft und gebucht wird alles bei bsport."
+  >
+    <div class="btn-row">
+      <a class="btn" href={bsport.kalender} target="_blank" rel="noopener">
+        Kostenlose Probestunde buchen <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </PageHero>
+
+  <!-- Karten -->
+  <section class="section" aria-labelledby="karten-titel">
+    <div class="wrap price-grid">
+      <div class="price-grid__head">
+        <p class="label">Karten</p>
+        <h2 id="karten-titel">Flexibel üben</h2>
+        <p class="muted">
+          Karten sind personengebunden. Erwachsene haben 15 Wochen Zeit, sie aufzubrauchen, Kinder 12 Monate. Bei
+          Urlaub oder Krankheit verlängern wir nach Absprache.
+        </p>
+        <a class="btn btn--ghost btn--small" href={bsport.karten} target="_blank" rel="noopener">Karte kaufen</a>
+      </div>
+      <ul class="price-list">
+        {
+          karten.map((k) => (
+            <li class="price-row">
+              <div>
+                <h3 class="price-row__name">
+                  {k.name}
+                  {k.hinweis && <span class="pill">{k.hinweis}</span>}
+                </h3>
+                <p class="price-row__detail">{k.detail}</p>
+              </div>
+              <p class="price-row__preis num">{k.preis}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mitgliedschaften -->
+  <section class="section section--stuck" aria-labelledby="abo-titel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Mitgliedschaften</p>
+        <h2 id="abo-titel">Regelmäßig kommen</h2>
+        <p class="lead">
+          Wer jede Woche kommt, zahlt mit der Monatsmitgliedschaft gut 16 € pro Stunde. Mit der 10er-Karte sind es
+          18,50 €.
+        </p>
+      </div>
+      <ul class="abos">
+        {
+          abos.map((a) => (
+            <li class:list={['abo', { 'abo--hervor': a.hervor }]}>
+              {a.hervor && <p class="abo__flag label">Unbegrenzt</p>}
+              <h3 class="abo__name">{a.name}</h3>
+              <p class="abo__preis num">
+                {a.preis} <span>{a.einheit}</span>
+              </p>
+              <ul class="abo__punkte">
+                {a.punkte.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="abos__cta">
+        <a class="btn" href={bsport.abos} target="_blank" rel="noopener">
+          Mitgliedschaft abschließen <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Einzelangebote -->
+  <section class="section" aria-labelledby="einzel-titel">
+    <div class="wrap price-grid">
+      <div class="price-grid__head">
+        <p class="label">Einzeltermine</p>
+        <h2 id="einzel-titel">Nur für dich</h2>
+        <p class="muted">
+          Personal Yoga und Yogamassage gibt Kathrin selbst. Termine vereinbarst du telefonisch unter{' '}
+          <a class="textlink" href={site.phoneHref}>{site.phone}</a>. Für Unternehmen machen wir{' '}
+          <a class="textlink" href={u('/unternehmen/')}>eigene Angebote</a>.
+        </p>
+      </div>
+      <ul class="price-list">
+        {
+          einzeln.map((k) => (
+            <li class="price-row">
+              <div>
+                <h3 class="price-row__name">{k.name}</h3>
+                <p class="price-row__detail">{k.detail}</p>
+              </div>
+              <p class="price-row__preis num">{k.preis}</p>
+            </li>
+          ))
+        }
+        <li class="price-row">
+          <div>
+            <h3 class="price-row__name">Klangmassage mit Fatima</h3>
+            <p class="price-row__detail">60 Minuten mit Vorgespräch</p>
+          </div>
+          <p class="price-row__preis price-row__preis--link">
+            <a class="textlink" href={bsport.einzeltermine} target="_blank" rel="noopener">bei bsport</a>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Krankenkasse + Gutschein + weitere -->
+  <section class="section section--tight" aria-label="Weitere Möglichkeiten">
+    <div class="wrap tiles">
+      <article class="tile tile--safran">
+        <p class="label">Krankenkasse</p>
+        <h2 class="tile__title">Kurs mit Zuschuss</h2>
+        <p>
+          Unsere Basiskurse sind zertifiziert. Die meisten Kassen zahlen einen Teil, für AOK-Mitglieder übernimmt der
+          Gesundheitsgutschein den ganzen Kurs.
+        </p>
+        <a class="more" href={u('/kurse/krankenkassen-basiskurs/')}>So funktioniert es <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="tile" id="gutschein">
+        <p class="label">Gutschein</p>
+        <h2 class="tile__title">Yoga verschenken</h2>
+        <p>
+          Betrag frei wählen, Widmung schreiben, eins von zwei Motiven aussuchen. Gutscheine gelten 24 Monate.
+        </p>
+        <a class="more" href={bsport.gutschein} target="_blank" rel="noopener">Gutschein erstellen <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="tile">
+        <p class="label">Mehr Karten</p>
+        <h2 class="tile__title">Pilates, Klang, Kinder</h2>
+        <p>
+          Karten für Pilates, Meditation und Klang, Angebote für Kinder und Ermäßigungen für Auszubildende findest du
+          bei bsport.
+        </p>
+        <a class="more" href={bsport.karten} target="_blank" rel="noopener">Alle Karten bei bsport <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+    <p class="wrap fineprint muted">
+      Auszug aus unserer Preisliste. Es gelten unsere <a class="textlink" href={u('/agb/')}>AGB</a>. Absagen bitte
+      spätestens 24 Stunden vor Beginn, sonst verfällt die Stunde.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .price-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: var(--space-l);
+    align-items: start;
+  }
+  .price-grid__head {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+  .price-grid__head .label {
+    color: var(--safran-tief);
+  }
+  .price-grid__head h2 {
+    font-size: var(--step-3);
+  }
+  .price-grid__head p:not(.label) {
+    font-size: 1rem;
+  }
+  .price-list {
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid var(--tinte);
+  }
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--linie);
+  }
+  .price-row__name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--step-2);
+  }
+  .price-row__detail {
+    margin-top: 0.2rem;
+    font-size: 1rem;
+    color: var(--tinte-2);
+  }
+  .price-row__preis {
+    flex: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-3);
+    line-height: 1;
+  }
+  .price-row__preis--link {
+    font-family: var(--font-text);
+    font-size: 1.05rem;
+  }
+  .pill {
+    padding: 0.15rem 0.6rem 0.05rem;
+    border-radius: 999px;
+    background: var(--safran);
+    font-family: var(--font-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .abos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    align-items: stretch;
+  }
+  .abo {
+    display: grid;
+    align-content: start;
+    gap: 0.9rem;
+    padding: 1.75rem;
+    border-radius: var(--radius-l);
+    background: var(--weiss);
+    border: 1px solid var(--linie);
+  }
+  .abo--hervor {
+    background: var(--tinte);
+    border-color: var(--tinte);
+    color: var(--kalk);
+  }
+  .abo__flag {
+    color: var(--safran);
+  }
+  .abo__name {
+    font-size: var(--step-2);
+  }
+  .abo__preis {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-4);
+    line-height: 1;
+  }
+  .abo__preis span {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .abo__punkte {
+    list-style: none;
+    padding: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--linie);
+  }
+  .abo--hervor .abo__punkte {
+    border-color: color-mix(in srgb, var(--kalk) 20%, transparent);
+  }
+  .abo__punkte li {
+    padding-block: 0.15rem;
+  }
+  .abo__punkte li::before {
+    content: '·';
+    margin-right: 0.5rem;
+    font-weight: 700;
+    color: var(--safran-tief);
+  }
+  .abo--hervor .abo__punkte li::before {
+    color: var(--safran);
+  }
+  .abos__cta {
+    margin-top: var(--space-m);
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .tile {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    justify-items: start;
+    padding: 1.75rem;
+    border-radius: var(--radius-l);
+    border: 1px solid var(--linie);
+    background: var(--weiss);
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+  .tile .label {
+    color: var(--safran-tief);
+  }
+  .tile p:not(.label) {
+    color: var(--tinte-2);
+    font-size: 1.02rem;
+  }
+  .tile--safran {
+    background: var(--safran);
+    border-color: var(--safran);
+  }
+  .tile--safran .label,
+  .tile--safran p:not(.label) {
+    color: var(--tinte);
+  }
+  .tile--safran .more {
+    border-color: var(--tinte);
+  }
+  .tile__title {
+    font-size: var(--step-2);
+  }
+  .fineprint {
+    margin-top: var(--space-m);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 900px) {
+    .price-grid {
+      grid-template-columns: 1fr;
+    }
+    .price-grid__head {
+      position: static;
+    }
+    .abos,
+    .tiles {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

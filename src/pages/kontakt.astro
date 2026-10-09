@@ -1,0 +1,230 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, bsport } from '../data/site';
+import { u } from '../lib/url';
+import eingang from '../assets/img/eingang.jpg';
+
+const wege = [
+  {
+    wie: 'Straßenbahn',
+    text: 'Linie 4 Richtung Ringelberg bis Karl-Marx-Platz, das Studio liegt gegenüber. Oder Linie 4 Richtung Bindersleben bis Lange Brücke, am Parkplatz vorbei in die Eichenstraße und die nächste rechts in die Neuwerkstraße. Nach 150 Metern bist du da.',
+  },
+  {
+    wie: 'Auto',
+    text: 'Parke auf dem Innenstadt-Parkplatz Eichenstraße. Von dort sind es zwei Minuten zu Fuß. Direkt vor dem Haus gibt es nur wenige Plätze.',
+  },
+  { wie: 'Fahrrad', text: 'Dein Rad kannst du sicher bei uns abstellen.' },
+  {
+    wie: 'Zu Fuß',
+    text: 'Vom Anger durch die Altstadt bis zum Hirschgarten, dann der Neuwerkstraße folgen bis zur Hausnummer 31.',
+  },
+];
+---
+
+<Base
+  title="Kontakt und Anfahrt"
+  description="So erreichst du die YogaLounge Erfurt: Neuwerkstraße 31, 99084 Erfurt, Haltestelle Karl-Marx-Platz. Telefon 0176 58 86 33 12, kathrin@seemannsyoga.de."
+>
+  <PageHero label="Kontakt" title="Ruf an, schreib oder komm vorbei." />
+
+  <section class="section section--tight">
+    <div class="wrap contact">
+      <div class="contact__cards">
+        <a class="contact-card" href={site.phoneHref}>
+          <span class="label">Anrufen</span>
+          <span class="contact-card__value display num">{site.phone}</span>
+          <span class="contact-card__hint">Kathrin Seemann</span>
+        </a>
+        <a class="contact-card" href={`mailto:${site.email}`}>
+          <span class="label">Schreiben</span>
+          <span class="contact-card__value contact-card__value--mail display">{site.email.split('@')[0]}@<wbr />{site.email.split('@')[1]}</span>
+          <span class="contact-card__hint">Für Fragen zu Kursen, Räumen und Kooperationen</span>
+        </a>
+        <div class="contact-card contact-card--static">
+          <span class="label">Vorbeikommen</span>
+          <address class="contact-card__value display">
+            {site.street}<br />{site.zip} {site.city}
+          </address>
+          <span class="contact-card__hint">Haltestelle Karl-Marx-Platz</span>
+        </div>
+      </div>
+      <p class="contact__book">
+        Kurse buchst du am schnellsten direkt im{' '}
+        <a class="textlink" href={bsport.kalender} target="_blank" rel="noopener">Kursplan bei bsport</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="anfahrt" aria-labelledby="anfahrt-titel">
+    <div class="wrap">
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Anfahrt</p>
+          <h2 id="anfahrt-titel">So findest du zu uns</h2>
+          <div class="media eingang">
+            <Image src={eingang} alt="Schaufenster und Eingang der YogaLounge" widths={[480, 800]} sizes="(max-width: 860px) 100vw, 26rem" />
+          </div>
+        </div>
+        <div class="cols__body">
+          <dl class="wege">
+            {
+              wege.map((w) => (
+                <div>
+                  <dt>{w.wie}</dt>
+                  <dd>{w.text}</dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <div class="map" data-map>
+            <div class="map__consent" data-map-consent>
+              <p>
+                Die Karte kommt von OpenStreetMap. Wenn du sie lädst, wird deine IP-Adresse an die OpenStreetMap Foundation
+                übertragen. Mehr dazu in der <a href={u('/datenschutz/')}>Datenschutzerklärung</a>.
+              </p>
+              <div class="btn-row">
+                <button class="btn btn--small" type="button" data-map-load>Karte laden</button>
+                <a class="btn btn--ghost btn--small" href={site.osmLink} target="_blank" rel="noopener">
+                  In OpenStreetMap öffnen
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Feedback</p>
+          <h2>Erzähl es weiter</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Hast du eine Idee, was wir besser machen können? Sag es uns, wir freuen uns über jeden Hinweis.
+          </p>
+          <p>
+            Wenn dir das Yoga bei uns guttut, hilft uns eine kurze Bewertung auf{' '}
+            <a href={site.facebook} target="_blank" rel="noopener">Facebook</a>,{' '}
+            <a href={site.instagram} target="_blank" rel="noopener">Instagram</a> oder{' '}
+            <a href={site.googleMaps} target="_blank" rel="noopener">Google</a> sehr. Und wenn du kein Social Media nutzt:
+            Erzähl es einfach weiter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ src: site.osmEmbed }}>
+  const btn = document.querySelector('[data-map-load]');
+  btn?.addEventListener('click', () => {
+    const map = document.querySelector('[data-map]');
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Karte: YogaLounge Erfurt, Neuwerkstraße 31';
+    iframe.loading = 'lazy';
+    iframe.className = 'map__frame';
+    map.replaceChildren(iframe);
+  });
+</script>
+
+<style>
+  .contact__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .contact-card {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding: 1.75rem;
+    border-radius: var(--radius-l);
+    background: var(--weiss);
+    border: 1px solid var(--linie);
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      transform 0.25s var(--ease);
+  }
+  a.contact-card:hover {
+    border-color: var(--tinte);
+    transform: translateY(-3px);
+  }
+  .contact-card .label {
+    color: var(--safran-tief);
+  }
+  .contact-card__value {
+    font-size: var(--step-2);
+    font-style: normal;
+    line-height: 1.2;
+  }
+  .contact-card__value--mail {
+    font-size: var(--step-1);
+  }
+  .contact-card__hint {
+    font-size: 0.95rem;
+    color: var(--tinte-2);
+  }
+  .contact__book {
+    margin-top: 1.5rem;
+    color: var(--tinte-2);
+  }
+  .eingang {
+    margin-top: 1rem;
+    aspect-ratio: 4 / 3;
+  }
+  .wege {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .wege div {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--linie);
+  }
+  .wege dt {
+    font-weight: 700;
+  }
+  .map {
+    margin-top: 2rem;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    background: var(--stuck);
+  }
+  .map__consent {
+    display: grid;
+    gap: 1rem;
+    align-content: center;
+    justify-items: start;
+    height: 100%;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    font-size: 1rem;
+  }
+  .map :global(.map__frame) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  @media (max-width: 860px) {
+    .contact__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .wege div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+    .map {
+      aspect-ratio: auto;
+      min-height: 20rem;
+    }
+  }
+</style>

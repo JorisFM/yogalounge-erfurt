@@ -1,0 +1,707 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import WeekBoard from '../components/WeekBoard.astro';
+import CourseGroups from '../components/CourseGroups.astro';
+import { team } from '../data/team';
+import { bsport, site } from '../data/site';
+import { u } from '../lib/url';
+
+import heroImg from '../assets/img/raum-matten.jpg';
+import studioImg from '../assets/img/raum-erker.jpg';
+import silvesterImg from '../assets/img/silvester.jpg';
+import singkreisImg from '../assets/img/singkreis.jpg';
+import klangImg from '../assets/img/klangschale.jpg';
+import neinJaImg from '../assets/img/workshop-nein-ja.jpg';
+import morgenImg from '../assets/img/morgenyoga.jpg';
+
+const kathrin = team[0];
+const weitere = team.slice(1);
+
+const termine = [
+  {
+    titel: 'Singkreis mit Peggy & Friends',
+    text: 'Ein Abend mit Mantras, Liedern und gemeinsamen Momenten der Stille.',
+    bild: singkreisImg,
+    alt: 'Hände spielen Gitarre',
+    href: bsport.singkreis,
+  },
+  {
+    titel: 'Duft und Klang',
+    text: 'Fatima ist zurück und nimmt dich mit auf eine Klangreise mit ätherischen Ölen. Ankommen, loslassen, nichts tun.',
+    bild: klangImg,
+    alt: 'Klangschale zwischen Kerzen und Heilsteinen',
+    href: bsport.klangreise,
+  },
+  {
+    titel: 'Spüre dein Nein. Finde dein Ja.',
+    text: 'Ein Workshop über Grenzen, Konsens und Beziehung. Für alle, denen ein klares Nein schwerfällt.',
+    bild: neinJaImg,
+    alt: 'Frau im Strickpullover hält sich selbst im Arm',
+    href: bsport.neinJa,
+  },
+  {
+    titel: 'Neu: Morgenyoga',
+    text: 'Eine Stunde Ashtanga vor der Arbeit. Macht wach, bevor der Tag richtig losgeht.',
+    bild: morgenImg,
+    alt: 'Person in Tänzerhaltung im Gegenlicht',
+    href: bsport.morgenyoga,
+  },
+];
+---
+
+<Base
+  title="YogaLounge Erfurt – Yogastudio in der Altstadt"
+  description="Das größte Yogastudio in Erfurt: vier Räume im Altbau an der Neuwerkstraße 31. Hatha, Vinyasa, Schwangerschafts- und Kinderyoga. Erste Stunde kostenlos."
+  bareTitle
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__text">
+      <div class="hero__inner">
+        <p class="hero__eyebrow rise">
+          <span class="deva" lang="hi">नमस्ते</span>
+          <span class="label">YogaLounge Erfurt</span>
+        </p>
+        <h1 class="rise" style="--delay:.06s">Yoga mitten in Erfurt.</h1>
+        <p class="hero__lead rise" style="--delay:.12s">
+          Vier Yogaräume in einem Altbau an der Neuwerkstraße. Klassen von morgens bis abends, für
+          Einsteiger und Geübte, für Schwangere, Eltern mit Baby und Kinder.
+        </p>
+        <div class="btn-row rise" style="--delay:.18s">
+          <a class="btn" href={bsport.kalender} target="_blank" rel="noopener">
+            Kostenlose Probestunde buchen <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--ghost" href={u('/kurse/')}>Wochenplan</a>
+        </div>
+        <p class="hero__where rise" style="--delay:.24s">
+          {site.street} · Haltestelle Karl-Marx-Platz, Linie 4
+        </p>
+      </div>
+    </div>
+    <div class="hero__media">
+      <Image
+        src={heroImg}
+        alt="Yogaraum der YogaLounge: Fischgrätparkett, Kronleuchter und vorbereitete Matten mit Kissen und Blöcken"
+        widths={[480, 720, 960, 1280]}
+        sizes="(max-width: 860px) 100vw, 44vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <!-- Heute -->
+  <section class="section section--tight today" aria-labelledby="heute-titel">
+    <div class="wrap">
+      <h2 id="heute-titel" class="visually-hidden">Kurse heute</h2>
+      <WeekBoard variant="heute" />
+      <div class="today__foot">
+        <a class="more" href={u('/kurse/')}>Ganzer Wochenplan <span aria-hidden="true">→</span></a>
+        <p class="muted">Kurzfristige Änderungen und freie Plätze siehst du im Kursplan bei bsport.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neu hier -->
+  <section class="section section--stuck" aria-labelledby="neu-titel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Neu hier?</p>
+        <h2 id="neu-titel">So kommst du zu deiner ersten Stunde.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step__num" aria-hidden="true">1</span>
+          <h3>Klasse aussuchen</h3>
+          <p>
+            Für den Anfang passen <a class="textlink" href={u('/kurse/yoga-fuer-anfaenger/')}>Yoga für Anfänger</a>{' '}
+            und <a class="textlink" href={u('/kurse/yoga-fuer-jedermann/')}>Yoga für jedermann</a>. Beide gibt es
+            mehrmals pro Woche.
+          </p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">2</span>
+          <h3>Gratis buchen</h3>
+          <p>
+            Wähle im Kursplan bei bsport die Option „Gratisprobestunde“. Sie gilt einmal pro Person für 90 Minuten
+            Gruppenunterricht.
+          </p>
+        </li>
+        <li class="step">
+          <span class="step__num" aria-hidden="true">3</span>
+          <h3>Zehn Minuten früher kommen</h3>
+          <p>
+            Matten, Decken und Kissen liegen bereit, Getränke auch. Bring bequeme Kleidung und warme Socken für die
+            Endentspannung mit.
+          </p>
+        </li>
+      </ol>
+      <div class="btn-row steps__cta">
+        <a class="btn" href={bsport.kalender} target="_blank" rel="noopener">
+          Zum Kursplan bei bsport <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn--ghost" href={u('/erste-stunde/')}>Alles zur ersten Stunde</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kurse -->
+  <section class="section" aria-labelledby="kurse-titel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Kurse</p>
+        <h2 id="kurse-titel">Von Babyyoga bis Vinyasa Flow.</h2>
+      </div>
+      <CourseGroups />
+    </div>
+  </section>
+
+  <!-- Studio -->
+  <section class="studio" aria-labelledby="studio-titel">
+    <div class="studio__media">
+      <Image
+        src={studioImg}
+        alt="Großer Yogaraum mit Erker, Kronleuchter, hohen Fenstern und Holzboden"
+        widths={[640, 960, 1440, 1920]}
+        sizes="(max-width: 860px) 100vw, 58vw"
+      />
+    </div>
+    <div class="studio__text">
+      <p class="label">Das Studio</p>
+      <h2 id="studio-titel">330 Quadratmeter Altbau.</h2>
+      <p>
+        Hohe Decken, Fischgrätparkett, Kronleuchter. Die YogaLounge liegt in der Erfurter Altstadt, gegenüber der
+        Haltestelle Karl-Marx-Platz. Neben den Yogaräumen gibt es einen kleinen Yogashop, den Handpan-Showroom von
+        Handpan World, einen Massage- und Coachingraum und eine Küche mit Lounge.
+      </p>
+      <dl class="facts">
+        <div><dt>Yogaräume</dt><dd class="num">4</dd></div>
+        <div><dt>Eröffnet</dt><dd class="num">2020</dd></div>
+        <div><dt>Aktive Yogis</dt><dd class="num">2.500</dd></div>
+      </dl>
+      <a class="more" href={u('/studio/')}>Mehr über das Studio <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- Krankenkasse -->
+  <section class="section section--safran kasse" aria-labelledby="kasse-titel">
+    <div class="wrap kasse__inner">
+      <div>
+        <p class="label">Yoga mit der Krankenkasse</p>
+        <h2 id="kasse-titel">AOK-Mitglied? Dann kann dein Basiskurs komplett bezahlt sein.</h2>
+      </div>
+      <div class="kasse__text">
+        <p>
+          Unsere Basiskurse sind als Präventionskurs zertifiziert. Die meisten gesetzlichen Kassen geben einen
+          Zuschuss. Bei der AOK übernimmt der Gesundheitsgutschein den ganzen Kurs, und den kannst du zweimal im
+          Jahr anfordern.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href={u('/kurse/krankenkassen-basiskurs/')}>So funktioniert es</a>
+          <a class="btn btn--ghost" href={site.phoneHref}>{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retreat -->
+  <section class="section section--tinte retreat-teaser" aria-labelledby="retreat-titel">
+    <div class="wrap retreat-teaser__grid">
+      <div class="media retreat-teaser__media">
+        <Image
+          src={silvesterImg}
+          alt="Funkelnde Wunderkerze vor dunklem Hintergrund"
+          widths={[480, 800]}
+          sizes="(max-width: 860px) 100vw, 40vw"
+        />
+      </div>
+      <div class="retreat-teaser__text">
+        <p class="label retreat-teaser__date num">30.12.2026 – 01.01.2027</p>
+        <h2 id="retreat-titel">Silvester-Retreat in der YogaLounge</h2>
+        <p class="lead">
+          Drei Tage mit Yoga, Klang, Mantras und gutem Essen. Um Mitternacht wird es bei uns erst einmal still. Höchstens
+          15 Plätze, du kannst auch allein kommen.
+        </p>
+        <p class="retreat-teaser__price num">460 € bis 19. Dezember, danach 490 €</p>
+        <div class="btn-row">
+          <a class="btn btn--safran" href={u('/retreat/')}>Programm ansehen</a>
+          <a class="btn btn--light" href={bsport.retreat} target="_blank" rel="noopener">Platz buchen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workshops -->
+  <section class="section" aria-labelledby="termine-titel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Workshops und Neues</p>
+        <h2 id="termine-titel">Außer der Reihe</h2>
+      </div>
+      <ul class="events">
+        {
+          termine.map((t) => (
+            <li class="event">
+              <a href={t.href} target="_blank" rel="noopener" class="event__link">
+                <div class="media event__media">
+                  <Image src={t.bild} alt={t.alt} widths={[400, 640]} sizes="(max-width: 700px) 100vw, 25vw" />
+                </div>
+                <h3 class="event__title">{t.titel}</h3>
+                <p class="event__text">{t.text}</p>
+                <span class="event__cta">Infos und Anmeldung bei bsport</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="events__all">
+        <a class="more" href={bsport.workshops} target="_blank" rel="noopener">
+          Alle Workshops <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section section--stuck team-teaser" aria-labelledby="team-titel">
+    <div class="wrap team-teaser__grid">
+      <div class="media team-teaser__photo">
+        <Image src={kathrin.bild} alt={kathrin.bildAlt} widths={[480, 800, 1100]} sizes="(max-width: 860px) 100vw, 45vw" />
+      </div>
+      <div class="team-teaser__text">
+        <p class="label">Team</p>
+        <h2 id="team-titel">Kathrin und ihr Team</h2>
+        <blockquote class="quote">
+          <p>„{kathrin.zitat?.text}“</p>
+          <footer>{kathrin.zitat?.quelle}</footer>
+        </blockquote>
+        <p>
+          Kathrin wurde in Indien ausgebildet und unterrichtet in der Tradition von Swami Sivananda. Mit ihr
+          unterrichten Yogalehrende, eine Klangtherapeutin und Gäste mit eigenen Workshops.
+        </p>
+        <ul class="team-teaser__faces">
+          {
+            weitere.map((p) => (
+              <li>
+                <Image src={p.bild} alt="" width={96} height={96} class="face" />
+                <span>{p.name}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="more" href={u('/team/')}>Das ganze Team <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gutschein + Anfahrt -->
+  <section class="section split" aria-label="Gutschein und Anfahrt">
+    <div class="wrap split__grid">
+      <div class="split__box">
+        <p class="label">Gutschein</p>
+        <h2 class="split__title">Yoga verschenken</h2>
+        <p>
+          Du wählst den Betrag, schreibst eine Widmung und suchst eins von zwei Motiven aus. Der Gutschein gilt 24 Monate
+          für alle Klassen und Angebote.
+        </p>
+        <a class="btn" href={bsport.gutschein} target="_blank" rel="noopener">
+          Gutschein erstellen <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="split__box">
+        <p class="label">Anfahrt</p>
+        <h2 class="split__title">{site.street}</h2>
+        <p>
+          Mit der Straßenbahn Linie 4 bis Karl-Marx-Platz, das Studio liegt direkt gegenüber. Mit dem Auto parkst du
+          auf dem Innenstadt-Parkplatz Eichenstraße, von dort sind es zwei Minuten zu Fuß.
+        </p>
+        <a class="btn btn--ghost" href={u('/kontakt/')}>Kontakt und Karte</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    min-height: min(84vh, 860px);
+    background: var(--safran);
+  }
+  .hero__text {
+    display: flex;
+    align-items: center;
+    padding: clamp(3rem, 6vw, 6rem) var(--gutter);
+    padding-inline-start: max(var(--gutter), calc((100vw - var(--max)) / 2));
+  }
+  .hero__inner {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 40rem;
+  }
+  .hero__eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+  }
+  .hero__eyebrow .deva {
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+  .hero h1 {
+    font-size: clamp(3.2rem, 1.5rem + 6.2vw, 7.4rem);
+    max-width: 9ch;
+  }
+  .hero__lead {
+    font-size: var(--step-1);
+    line-height: 1.5;
+    max-width: 34rem;
+  }
+  .hero__where {
+    hyphens: manual;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: color-mix(in srgb, var(--tinte) 78%, var(--safran));
+  }
+  .hero__media {
+    position: relative;
+    min-height: 22rem;
+  }
+  .hero__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+  @media (max-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .hero__media {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+      order: -1;
+    }
+  }
+
+  /* ---------- Heute ---------- */
+  .today {
+    padding-block-start: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+  .today__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 2rem;
+    margin-top: 0.5rem;
+    font-size: 0.98rem;
+  }
+
+  /* ---------- Schritte ---------- */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-m);
+    list-style: none;
+    padding: 0;
+  }
+  .step {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .step__num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 4.5rem;
+    line-height: 0.8;
+    color: var(--safran);
+    -webkit-text-stroke: 1.5px var(--tinte);
+    margin-bottom: 0.4rem;
+  }
+  .step h3 {
+    font-size: var(--step-2);
+  }
+  .step p {
+    color: var(--tinte-2);
+  }
+  .steps__cta {
+    margin-top: var(--space-l);
+  }
+  @media (max-width: 760px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Studio ---------- */
+  .studio {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    background: var(--stuck);
+  }
+  .studio__media {
+    position: relative;
+    min-height: 32rem;
+  }
+  .studio__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .studio__text {
+    display: grid;
+    gap: 1.25rem;
+    align-content: center;
+    justify-items: start;
+    padding: var(--space-xl) var(--gutter);
+    padding-inline-end: max(var(--gutter), calc((100vw - var(--max)) / 2));
+  }
+  .studio__text .label {
+    color: var(--safran-tief);
+  }
+  .studio__text h2 {
+    font-size: var(--step-3);
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    padding-block: 0.5rem;
+  }
+  .facts div {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .facts dt {
+    font-size: 0.92rem;
+    color: var(--tinte-2);
+  }
+  .facts dd {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-3);
+    line-height: 1;
+  }
+  @media (max-width: 860px) {
+    .studio {
+      grid-template-columns: 1fr;
+    }
+    .studio__media {
+      min-height: 0;
+      aspect-ratio: 3 / 2;
+    }
+    .studio__text {
+      padding-block: var(--space-l);
+    }
+  }
+
+  /* ---------- Krankenkasse ---------- */
+  .kasse__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--space-m) var(--space-l);
+    align-items: end;
+  }
+  .kasse h2 {
+    font-size: var(--step-3);
+    margin-top: 0.75rem;
+  }
+  .kasse__text {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (max-width: 860px) {
+    .kasse__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Retreat ---------- */
+  .retreat-teaser__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--space-l);
+    align-items: center;
+  }
+  .retreat-teaser__media {
+    aspect-ratio: 4 / 5;
+  }
+  .retreat-teaser__text {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .retreat-teaser__date {
+    color: var(--safran);
+  }
+  .retreat-teaser__price {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--safran);
+  }
+  @media (max-width: 860px) {
+    .retreat-teaser__grid {
+      grid-template-columns: 1fr;
+    }
+    .retreat-teaser__media {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  /* ---------- Workshops ---------- */
+  .events {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-m);
+    list-style: none;
+    padding: 0;
+  }
+  .event__link {
+    display: grid;
+    gap: 0.7rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  .event__media {
+    aspect-ratio: 4 / 3;
+  }
+  .event__media img {
+    transition: transform 0.6s var(--ease);
+  }
+  .event__link:hover .event__media img {
+    transform: scale(1.04);
+  }
+  .event__title {
+    font-size: var(--step-1);
+    margin-top: 0.4rem;
+  }
+  .event__link:hover .event__title {
+    text-decoration: underline;
+    text-decoration-color: var(--safran);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+  .event__text {
+    font-size: 1rem;
+    color: var(--tinte-2);
+    line-height: 1.5;
+  }
+  .event__cta {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--safran-tief);
+  }
+  .events__all {
+    margin-top: var(--space-l);
+  }
+  @media (max-width: 1000px) {
+    .events {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .events {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Team ---------- */
+  .team-teaser__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-l);
+    align-items: center;
+  }
+  .team-teaser__photo {
+    aspect-ratio: 4 / 5;
+  }
+  .team-teaser__photo img {
+    object-position: 50% 25%;
+  }
+  .team-teaser__text {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .team-teaser__text .label {
+    color: var(--safran-tief);
+  }
+  .quote p {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.25;
+    font-weight: 500;
+  }
+  .quote footer {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--tinte-2);
+  }
+  .team-teaser__faces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+  .team-teaser__faces li {
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .face {
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  @media (max-width: 860px) {
+    .team-teaser__grid {
+      grid-template-columns: 1fr;
+    }
+    .team-teaser__photo {
+      aspect-ratio: 1;
+    }
+  }
+
+  /* ---------- Gutschein + Anfahrt ---------- */
+  .split__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-m);
+  }
+  .split__box {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    align-content: start;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+    border: 1px solid var(--linie);
+    border-radius: var(--radius-l);
+    background: var(--weiss);
+  }
+  .split__box .label {
+    color: var(--safran-tief);
+  }
+  .split__title {
+    font-size: var(--step-3);
+  }
+  .split__box p:not(.label) {
+    color: var(--tinte-2);
+  }
+  @media (max-width: 760px) {
+    .split__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

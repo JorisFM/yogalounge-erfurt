@@ -1,0 +1,200 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { team } from '../data/team';
+import { u } from '../lib/url';
+
+const profile = team.filter((p) => p.text);
+const weitere = team.filter((p) => !p.text);
+---
+
+<Base
+  title="Team"
+  description="Die Yogalehrenden der YogaLounge Erfurt: Gründerin Kathrin Seemann, ausgebildet in Indien in der Sivananda-Tradition, und ihr Team."
+>
+  <PageHero
+    label="Team"
+    title="Wer bei uns unterrichtet"
+    lead="Kathrin hat die YogaLounge gegründet und unterrichtet die meisten Klassen. Mit ihr arbeiten Yogalehrende, eine Klangtherapeutin und Gäste mit eigenen Workshops."
+  />
+
+  <section class="section">
+    <div class="wrap people">
+      {
+        profile.map((p, i) => (
+          <article class:list={['person', { 'person--flip': i % 2 === 1 }]} id={p.name.toLowerCase()}>
+            <div class="media person__img">
+              <Image src={p.bild} alt={p.bildAlt} widths={[480, 800, 1100]} sizes="(max-width: 860px) 100vw, 40vw" />
+            </div>
+            <div class="person__text">
+              <p class="label">{p.rolle}</p>
+              <h2>{p.name}</h2>
+              {p.text?.map((t) => <p>{t}</p>)}
+              {p.zitat && (
+                <blockquote class="person__quote">
+                  <p>„{p.zitat.text}“</p>
+                  {p.zitat.quelle !== p.name && <footer>{p.zitat.quelle}</footer>}
+                </blockquote>
+              )}
+              <div class="person__lists">
+                {p.ausbildung && (
+                  <div>
+                    <h3 class="label">Ausbildung</h3>
+                    <ul class="dots">
+                      {p.ausbildung.map((a) => (
+                        <li>{a}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {p.angebote && (
+                  <div>
+                    <h3 class="label">Unterrichtet</h3>
+                    <ul class="dots">
+                      {p.angebote.map((a) => (
+                        <li>{a}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--stuck section--tight" aria-labelledby="weitere-titel">
+    <div class="wrap">
+      <h2 id="weitere-titel" class="weitere-title">Außerdem im Team</h2>
+      <ul class="weitere">
+        {
+          weitere.map((p) => (
+            <li>
+              <div class="media weitere__img">
+                <Image src={p.bild} alt={p.bildAlt} widths={[320, 560]} sizes="14rem" />
+              </div>
+              <p class="weitere__name">{p.name}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="weitere__note">
+        Sonntags unterrichtet Mia das Yoga am Wochenende. Du bist selbst Yogalehrerin oder Yogalehrer?
+        <a class="textlink" href={u('/zusammenarbeit/')}>Wir suchen Verstärkung.</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .people {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .person {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--space-l);
+    align-items: start;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+  .person--flip .person__img {
+    order: 2;
+  }
+  .person__img {
+    aspect-ratio: 4 / 5;
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+  .person__text {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+  .person__text > .label {
+    color: var(--safran-tief);
+  }
+  .person__text h2 {
+    font-size: var(--step-4);
+    margin-bottom: 0.25rem;
+  }
+  .person__quote {
+    margin-block: 0.75rem;
+    padding-left: 1.25rem;
+    border-left: 4px solid var(--safran);
+  }
+  .person__quote p {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    line-height: 1.3;
+  }
+  .person__quote footer {
+    margin-top: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--tinte-2);
+  }
+  .person__lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--linie);
+  }
+  .person__lists h3 {
+    margin-bottom: 0.75rem;
+    color: var(--tinte-2);
+  }
+  .person__lists .dots {
+    font-size: 1rem;
+  }
+  .weitere-title {
+    font-size: var(--step-3);
+    margin-bottom: var(--space-m);
+  }
+  .weitere {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+  .weitere__img {
+    width: 14rem;
+    aspect-ratio: 4 / 5;
+  }
+  .weitere__name {
+    margin-top: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-1);
+  }
+  .weitere__note {
+    margin-top: var(--space-m);
+    color: var(--tinte-2);
+  }
+  @media (max-width: 860px) {
+    .person {
+      grid-template-columns: 1fr;
+    }
+    .person--flip .person__img {
+      order: 0;
+    }
+    .person__img {
+      position: static;
+      aspect-ratio: 4 / 3;
+    }
+  }
+  @media (max-width: 520px) {
+    .weitere li {
+      flex: 1 1 40%;
+    }
+    .weitere__img {
+      width: 100%;
+    }
+  }
+</style>

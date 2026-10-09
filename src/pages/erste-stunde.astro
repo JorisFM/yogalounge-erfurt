@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { bsport, site } from '../data/site';
+import { u } from '../lib/url';
+---
+
+<Base
+  title="Deine erste Stunde"
+  description="Was du für deine erste Yogastunde in der YogaLounge Erfurt wissen musst: Probestunde buchen, was du mitbringst, Studioregeln und Hinweise zur Gesundheit."
+>
+  <PageHero
+    label="Neu hier"
+    title="Deine erste Stunde"
+    lead="Die erste Stunde ist kostenlos und dauert 90 Minuten. Du brauchst keine Vorkenntnisse und kein eigenes Equipment."
+  >
+    <div class="btn-row">
+      <a class="btn" href={bsport.kalender} target="_blank" rel="noopener">
+        Probestunde buchen <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn--ghost" href={site.phoneHref}>Lieber anrufen: {site.phone}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Buchen</p>
+          <h2>So meldest du dich an</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Such dir im <a href={bsport.kalender} target="_blank" rel="noopener">Kursplan bei bsport</a> eine Stunde
+            aus und wähle beim Buchen die Option „Gratisprobestunde“. Sie steht jeder Person einmal zur Verfügung. Du
+            kannst dich auch telefonisch anmelden.
+          </p>
+          <p>
+            Für den Anfang passen <a href={u('/kurse/yoga-fuer-anfaenger/')}>Yoga für Anfänger</a> und{' '}
+            <a href={u('/kurse/yoga-fuer-jedermann/')}>Yoga für jedermann</a>. Schwangere starten im{' '}
+            <a href={u('/kurse/schwangerschaftsyoga/')}>Schwangerschaftsyoga</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Vorher</p>
+          <h2>Was du mitbringst</h2>
+        </div>
+        <div class="cols__body">
+          <ul class="dots">
+            <li>Bequeme Kleidung, die beim Atmen nicht einengt.</li>
+            <li>Eine warme Jacke und dicke Socken für die Endentspannung.</li>
+            <li>Sonst nichts. Matten, Decken, Kissen und Getränke sind da.</li>
+            <li>Iss ein bis zwei Stunden vorher nichts Schweres.</li>
+            <li>Sei etwa zehn Minuten vor Beginn da, damit du dich in Ruhe umziehen kannst.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Auf der Matte</p>
+          <h2>Während der Stunde</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Du bist dein eigener Maßstab. Was wehtut oder sich falsch anfühlt, lässt du weg. Neben dir übt immer jemand,
+            der beweglicher oder kräftiger ist, und das spielt keine Rolle.
+          </p>
+          <p>
+            Beweg dich langsam und achte auf deinen Atem. Jeder Tag ist anders, also auch jede Stunde. Nach dem Yoga lohnt
+            es sich, nicht gleich zum nächsten Termin zu hetzen.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols" id="regeln">
+        <div class="cols__head">
+          <p class="label">Im Studio</p>
+          <h2>Damit es für alle ruhig bleibt</h2>
+        </div>
+        <div class="cols__body">
+          <ul class="dots">
+            <li>Komm frühestens 15 Minuten vor deiner Stunde.</li>
+            <li>Schließ die Mitteltür hinter dir.</li>
+            <li>Sei leise beim Reinkommen. In den anderen Räumen meditiert vielleicht gerade jemand.</li>
+            <li>Schuhe bleiben im Regal am Eingang, im Studio läufst du barfuß oder in Socken.</li>
+            <li>Melde dich an der Rezeption oder buch dich über die bsport-App ein, damit wir wissen, dass du da bist.</li>
+            <li>Reinige deine Matte und die Hilfsmittel nach der Stunde. Alles dafür steht bereit.</li>
+            <li>
+              Wenn du dich verspätest, schreib uns kurz. Ab Stundenbeginn ist die Klingel aus, ohne Nachricht kommst du
+              nicht mehr rein.
+            </li>
+            <li>Lass dein Handy stumm und außerhalb des Raums. Das gilt auch für Benachrichtigungen auf der Smartwatch.</li>
+            <li>Vergessene Sachen bewahren wir an der Rezeption auf.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Gesundheit</p>
+          <h2>Wann du besser pausierst</h2>
+        </div>
+        <div class="cols__body">
+          <ul class="dots">
+            <li>
+              Wenn du krank bist, bleib bitte zu Hause und sag uns Bescheid. Nach einer Grippe, Entzündung oder Operation
+              gib deinem Körper Zeit, bevor du wieder übst.
+            </li>
+            <li>
+              Bei akuten Rückenproblemen wie Hexenschuss, Ischias oder Bandscheibenvorfall braucht dein Körper Ruhe. Yoga
+              kann das in diesem Moment verschlimmern.
+            </li>
+            <li>Bei chronischen Beschwerden sprich vorher mit deiner Ärztin oder deinem Arzt.</li>
+            <li>Erzähl uns vor der Stunde von Schmerzen, Einschränkungen oder Operationen.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols" id="schwangerschaft">
+        <div class="cols__head">
+          <p class="label">Schwangerschaft</p>
+          <h2>Wenn du schwanger bist</h2>
+        </div>
+        <div class="cols__body">
+          <p>Sprich vorher mit deiner Hebamme oder Ärztin. Auf der Matte gilt:</p>
+          <ul class="dots">
+            <li>Übe sanft und achte auf dich und dein Baby.</li>
+            <li>Mach eine Pause oder hör auf, sobald eine Haltung zu anstrengend wird.</li>
+            <li>Kein Druck auf den Bauch, kein Überdehnen, nicht überhitzen.</li>
+            <li>Halte nie den Atem an und bleib in fordernden Haltungen höchstens acht Atemzüge.</li>
+            <li>Ab dem 4. Monat keine Haltungen mehr in Bauch- oder flacher Rückenlage.</li>
+            <li>Ab dem 7. Monat keine Umkehrhaltungen, starken Rückbeugen oder tiefen Vorbeugen.</li>
+            <li>Ab der 36. Woche keine tiefe Hocke (Malasana) mehr.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,561 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { bsport, site } from '../data/site';
+import silvester from '../assets/img/silvester.jpg';
+import klang from '../assets/img/klangschale.jpg';
+import raum from '../assets/img/raum-erker.jpg';
+
+const tage = [
+  {
+    datum: '30. Dezember',
+    titel: 'Ankommen und loslassen',
+    zeit: 'ab ca. 15 Uhr',
+    programm: ['Come Together', 'Yoga', 'Klang und Meditation', 'Abendessen', 'Impuls', 'Kirtan und Mantras'],
+    text: [
+      'Wir lernen uns kennen und kommen in Ruhe in der YogaLounge an. Eine gemeinsame Yogastunde eröffnet das Retreat, danach wird es mit Klang ruhiger.',
+      'Am Abend essen wir zusammen, hören einen Impuls aus der Welt des Yoga und lassen den ersten Tag mit Kirtan und Mantras ausklingen.',
+    ],
+  },
+  {
+    datum: '31. Dezember',
+    titel: 'Der letzte Tag im alten Jahr',
+    zeit: '9 Uhr bis nach Mitternacht',
+    programm: [
+      'Morning Yoga',
+      'Brunch',
+      'Tee-Ritual',
+      'Stadtspaziergang',
+      'Klangerlebnis',
+      'Yin Yoga',
+      'Arati-Zeremonie',
+      'Silvesteressen',
+      'Feuerritual',
+      'Jahreswechsel in Stille',
+      'Mantras',
+      'Anstoßen',
+    ],
+    text: [
+      'Der Tag beginnt mit Morning Yoga und einem langen Brunch. Nach einem Tee-Ritual verlassen wir die Matte und gehen gemeinsam durch das winterliche Erfurt.',
+      'Zurück im Studio gibt es Klang und Ruhe, mit Yin Yoga gleiten wir in den Abend. Nach der Arati-Zeremonie und dem Silvesteressen gehen wir für ein Feuerritual nach draußen.',
+      'Kurz vor Mitternacht wird es bei uns still. Den Jahreswechsel erleben wir bewusst zusammen, danach singen wir Mantras und stoßen an.',
+    ],
+  },
+  {
+    datum: '1. Januar',
+    titel: 'Gemeinsam ins neue Jahr',
+    zeit: 'ca. 9 bis 13 Uhr',
+    programm: ['Morning Yoga', 'Neujahrsbrunch', 'Handpan ausprobieren', 'Abschlussritual'],
+    text: [
+      'Auch den ersten Morgen des Jahres beginnen wir mit Yoga. Nach dem Brunch darfst du die Handpan selbst ausprobieren, statt nur zuzuhören.',
+      'Mit einem gemeinsamen Abschlussritual endet das Retreat.',
+    ],
+  },
+];
+
+const preise = [
+  { name: 'Early Bird', preis: '420 €', zeitraum: 'bis 30.09.2026', von: '2000-01-01', bis: '2026-09-30' },
+  { name: 'Regulär', preis: '460 €', zeitraum: '01.10. bis 19.12.2026', von: '2026-10-01', bis: '2026-12-19' },
+  { name: 'Kurzfristig', preis: '490 €', zeitraum: 'ab 20.12.2026', von: '2026-12-20', bis: '2027-01-01' },
+];
+
+const leute = [
+  { name: 'Kathrin', rolle: 'Retreatbegleitung, Yoga, Rituale' },
+  { name: 'Fatima', rolle: 'Meditation, Klangreise, Klangmassage' },
+  { name: 'Frederike', rolle: 'Power Yoga' },
+  { name: 'Ramesh', rolle: 'Ayurveda-Massage' },
+  { name: 'Naluna', rolle: 'Handpan-Liegekonzert, Handpan ausprobieren' },
+  { name: 'Alina', rolle: 'Ashtanga Yoga' },
+  { name: 'Johanna', rolle: 'Organisation, Silvesterabend, Feuerritual' },
+  { name: 'Peggy', rolle: 'Kirtan, Mantrasingen, Live-Musik' },
+];
+---
+
+<Base
+  title="Silvester-Retreat 2026/27"
+  description="Silvester-Retreat in der YogaLounge Erfurt vom 30.12.2026 bis 01.01.2027: Yoga, Klang, Mantras, gemeinsames Essen und ein stiller Jahreswechsel. Maximal 15 Plätze."
+>
+  <section class="r-hero section--tinte">
+    <div class="r-hero__media">
+      <Image src={silvester} alt="" widths={[640, 960]} sizes="(max-width: 860px) 100vw, 45vw" loading="eager" />
+    </div>
+    <div class="r-hero__text">
+      <p class="label r-hero__date num">30.12.2026 – 01.01.2027 · YogaLounge Erfurt</p>
+      <h1>Bewusst und gemeinsam ins neue Jahr</h1>
+      <p class="lead">
+        Drei Tage mit Yoga, Klang und Musik, gutem Essen, kleinen Ritualen und einem gemeinsamen Silvesterabend. In einer
+        Gruppe von höchstens 15 Menschen.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--safran" href={bsport.retreat} target="_blank" rel="noopener">
+          Retreatplatz buchen <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn--light" href="#programm">Programm</a>
+      </div>
+      <dl class="r-facts">
+        <div><dt>Plätze</dt><dd class="num">max. 15</dd></div>
+        <div><dt>Erfahrung</dt><dd>nicht nötig</dd></div>
+        <div><dt>Allein kommen</dt><dd>sehr gern</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap--narrow r-intro">
+      <p class="r-intro__big display">
+        Wie möchtest du das alte Jahr verabschieden? Und wie möchtest du ins neue starten?
+      </p>
+      <p>
+        Wir nehmen uns Zeit für Bewegung und Ruhe, für Begegnungen, einen Blick zurück und für das, was vor uns liegt. Das
+        Programm ist voll, aber nichts davon ist Pflicht. Du kannst Programmpunkte auslassen, dich zurückziehen und später
+        wieder dazukommen.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--stuck" id="programm" aria-labelledby="programm-titel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Programm</p>
+        <h2 id="programm-titel">Drei Tage zwischen den Jahren</h2>
+        <p class="lead">Das Retreat beginnt am Nachmittag des 30. Dezember und endet am Mittag des 1. Januar.</p>
+      </div>
+      <ol class="days">
+        {
+          tage.map((t) => (
+            <li class="day">
+              <div class="day__when">
+                <p class="day__datum display">{t.datum}</p>
+                <p class="day__zeit">{t.zeit}</p>
+              </div>
+              <div class="day__body">
+                <h3>{t.titel}</h3>
+                <ul class="day__tags" aria-label="Geplant">
+                  {t.programm.map((p) => (
+                    <li>{p}</li>
+                  ))}
+                </ul>
+                {t.text.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="note days__note">
+        Zu ausgewählten Zeiten kannst du während des Retreats Massagen dazubuchen. Preise und Buchung dafür folgen. Weil
+        viele Menschen beteiligt sind, können sich einzelne Programmpunkte und Zeiten noch leicht verschieben.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="preis-titel">
+    <div class="wrap">
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Preis und Buchung</p>
+          <h2 id="preis-titel">Was das Retreat kostet</h2>
+        </div>
+        <div class="cols__body">
+          <ol class="tiers" data-tiers>
+            {
+              preise.map((p) => (
+                <li class="tier" data-von={p.von} data-bis={p.bis}>
+                  <span class="tier__name">{p.name}</span>
+                  <span class="tier__preis num">{p.preis}</span>
+                  <span class="tier__zeit">{p.zeitraum}</span>
+                  <span class="tier__flag" data-flag hidden />
+                </li>
+              ))
+            }
+          </ol>
+          <p class="note">
+            Du hast seit Juni 2026 eine Klasse oder ein Event bei uns gebucht? Dann bekommst du 10 % Rabatt auf den jeweils
+            gültigen Preis. Frag uns nach dem Rabattcode.
+          </p>
+          <h3>Im Preis enthalten</h3>
+          <p>Das gesamte Programm und alle gemeinsamen Mahlzeiten und Getränke aus dem Programm.</p>
+          <h3>Nicht enthalten</h3>
+          <p>Deine Übernachtung und Zusatzangebote wie Massagen.</p>
+          <p>
+            Du möchtest nur zwei Tage oder nur an Silvester dabei sein? Schreib uns. Teilbuchungen sind auf Anfrage möglich,
+            solange Plätze frei sind.
+          </p>
+          <div class="btn-row">
+            <a class="btn" href={bsport.retreat} target="_blank" rel="noopener">
+              Retreatplatz über bsport buchen <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--ghost" href={`mailto:${site.email}?subject=Silvester-Retreat`}>Anfrage per E-Mail</a>
+          </div>
+          <h3>Stornierung</h3>
+          <p>
+            Mit deiner Buchung über bsport oder per Telefon ist dein Platz verbindlich reserviert. Bis einschließlich
+            29.11.2026 kannst du stornieren und bekommst 85 % des gezahlten Preises zurück. Ab dem 30.11.2026 können wir
+            nichts mehr erstatten, weil unsere Planung dann schon weit fortgeschritten ist. Sagen wir das Retreat ab,
+            bekommst du den vollen Preis zurück.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Wer ist dabei</p>
+          <h2>Das Retreat-Team</h2>
+        </div>
+        <div class="cols__body">
+          <ul class="crew">
+            {
+              leute.map((l) => (
+                <li>
+                  <span class="crew__name">{l.name}</span>
+                  <span class="crew__rolle">{l.rolle}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Allein kommen</p>
+          <h2>Niemand will mit? Komm trotzdem.</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Vielleicht gefällt dir die Idee eines bewussten Jahreswechsels, aber in deinem Umfeld will niemand mit auf ein
+            Retreat. Du kannst allein nach Erfurt kommen und verbringst die Tage trotzdem in Gemeinschaft.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="cols__head">
+          <p class="label">Anreise</p>
+          <h2>Anreise und Übernachtung</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Das Retreat findet in der YogaLounge statt, {site.street}, mitten in der Altstadt und direkt an der Haltestelle
+            Karl-Marx-Platz. Vom Hauptbahnhof kommst du mit der Straßenbahn bequem hin.
+          </p>
+          <p>
+            Direkt vor dem Studio gibt es nur wenige Parkplätze. Am entspanntesten ist es, das Auto an der Unterkunft stehen
+            zu lassen und Straßenbahn zu fahren.
+          </p>
+          <p>
+            Die Übernachtung buchst du selbst. Weil Silvester ist, am besten früh. Ein paar Ideen, Preise und Verfügbarkeit
+            bitte direkt beim Anbieter prüfen:
+          </p>
+          <ul class="dots">
+            <li><strong>Ganz in der Nähe:</strong> Hotel Erfurt-City, Neuwerkstraße 23</li>
+            <li><strong>Klassisches Stadthotel:</strong> ibis Erfurt Altstadt, Barfüßerstraße 9</li>
+            <li><strong>Etwas individueller:</strong> Villa Altstadtperle, Michaelisstraße 29</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="r-end section--tinte">
+    <div class="wrap r-end__grid">
+      <div class="r-end__images">
+        <div class="media"><Image src={raum} alt="" widths={[480, 800]} sizes="(max-width: 760px) 50vw, 22vw" /></div>
+        <div class="media"><Image src={klang} alt="" widths={[480, 800]} sizes="(max-width: 760px) 50vw, 22vw" /></div>
+      </div>
+      <div class="r-end__text">
+        <h2>Dieses Jahr darf Silvester anders sein.</h2>
+        <p class="lead">Ein bisschen weniger laut und ein bisschen weniger müssen. Dafür mehr Zeit für das, was sich gut anfühlt.</p>
+        <p class="num r-end__meta">30.12.2026 – 01.01.2027 · YogaLounge Erfurt · max. 15 Plätze</p>
+        <a class="btn btn--safran" href={bsport.retreat} target="_blank" rel="noopener">
+          Ich bin dabei <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Gültige Preisstufe hervorheben (Datum in Erfurt).
+  const heute = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Berlin' }).format(new Date());
+  document.querySelectorAll<HTMLElement>('[data-tiers] .tier').forEach((tier) => {
+    const flag = tier.querySelector<HTMLElement>('[data-flag]');
+    const { von = '', bis = '' } = tier.dataset;
+    if (heute > bis) {
+      tier.classList.add('is-over');
+      if (flag) {
+        flag.textContent = 'abgelaufen';
+        flag.hidden = false;
+      }
+    } else if (heute >= von) {
+      tier.classList.add('is-now');
+      if (flag) {
+        flag.textContent = 'gilt jetzt';
+        flag.hidden = false;
+      }
+    }
+  });
+</script>
+
+<style>
+  .r-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    background: var(--tinte);
+    color: var(--kalk);
+    min-height: min(80vh, 820px);
+  }
+  .r-hero__media {
+    position: relative;
+  }
+  .r-hero__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .r-hero__text {
+    display: grid;
+    gap: 1.4rem;
+    align-content: center;
+    justify-items: start;
+    padding: clamp(3rem, 6vw, 6rem) var(--gutter);
+    padding-inline-end: max(var(--gutter), calc((100vw - var(--max)) / 2));
+  }
+  .r-hero__date {
+    color: var(--safran);
+  }
+  .r-hero h1 {
+    font-size: clamp(2.8rem, 1.5rem + 4.5vw, 5.8rem);
+    max-width: 12ch;
+  }
+  .r-hero .lead {
+    color: color-mix(in srgb, var(--kalk) 80%, var(--tinte));
+    max-width: 34rem;
+  }
+  .r-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--kalk) 20%, transparent);
+  }
+  .r-facts div {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .r-facts dt {
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--kalk) 65%, var(--tinte));
+  }
+  .r-facts dd {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    color: var(--safran);
+  }
+  @media (max-width: 860px) {
+    .r-hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .r-hero__media {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  .r-intro {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .r-intro__big {
+    font-size: var(--step-3);
+    line-height: 1.15;
+  }
+  .r-intro p:not(.r-intro__big) {
+    font-size: var(--step-1);
+    color: var(--tinte-2);
+  }
+
+  .days {
+    list-style: none;
+    padding: 0;
+  }
+  .day {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+    gap: var(--space-s) var(--space-l);
+    padding-block: var(--space-m) var(--space-l);
+    border-top: 2px solid var(--tinte);
+  }
+  .day__datum {
+    font-size: var(--step-3);
+    line-height: 1;
+  }
+  .day__zeit {
+    margin-top: 0.5rem;
+    color: var(--safran-tief);
+    font-weight: 600;
+  }
+  .day__body {
+    display: grid;
+    gap: 1rem;
+    max-width: 44rem;
+  }
+  .day__body h3 {
+    font-size: var(--step-2);
+  }
+  .day__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+  }
+  .day__tags li {
+    padding: 0.25rem 0.75rem 0.15rem;
+    border-radius: 999px;
+    background: var(--weiss);
+    border: 1px solid var(--linie);
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .days__note {
+    background: var(--weiss);
+  }
+  @media (max-width: 760px) {
+    .day {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+  }
+  .tier {
+    display: grid;
+    gap: 0.3rem;
+    align-content: start;
+    padding: 1.1rem 1.1rem 1.25rem;
+    border: 1px solid var(--linie);
+    border-radius: var(--radius-l);
+    background: var(--weiss);
+  }
+  .tier__name {
+    font-weight: 600;
+  }
+  .tier__preis {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-3);
+    line-height: 1.1;
+  }
+  .tier__zeit {
+    font-size: 0.92rem;
+    color: var(--tinte-2);
+  }
+  .tier__flag {
+    justify-self: start;
+    margin-top: 0.4rem;
+    padding: 0.15rem 0.6rem 0.05rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--stuck);
+  }
+  .tier.is-over {
+    opacity: 0.5;
+  }
+  .tier.is-over .tier__preis {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+  }
+  .tier.is-now {
+    border-color: var(--safran);
+    background: color-mix(in srgb, var(--safran) 16%, var(--weiss));
+    box-shadow: inset 0 0 0 1px var(--safran);
+  }
+  .tier.is-now .tier__flag {
+    background: var(--safran);
+  }
+  @media (max-width: 600px) {
+    .tiers {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .crew {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 0;
+    list-style: none;
+    padding: 0;
+  }
+  .crew li {
+    display: grid;
+    gap: 0.1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--linie);
+  }
+  .crew__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-1);
+  }
+  .crew__rolle {
+    font-size: 0.98rem;
+    color: var(--tinte-2);
+  }
+
+  .r-end {
+    background: var(--tinte);
+    color: var(--kalk);
+    padding-block: var(--space-xl);
+  }
+  .r-end__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--space-l);
+    align-items: center;
+  }
+  .r-end__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .r-end__images .media {
+    aspect-ratio: 3 / 4;
+  }
+  .r-end__images .media:nth-child(2) {
+    margin-top: 3rem;
+  }
+  .r-end__text {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .r-end__text h2 {
+    font-size: var(--step-4);
+  }
+  .r-end__text .lead {
+    color: color-mix(in srgb, var(--kalk) 80%, var(--tinte));
+  }
+  .r-end__meta {
+    color: var(--safran);
+    font-weight: 600;
+  }
+  @media (max-width: 760px) {
+    .r-end__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

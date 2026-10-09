@@ -1,0 +1,169 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+const partner = [
+  { name: 'Philip Harden', url: 'https://www.3punkt5.com' },
+  { name: 'Sitzfest Manufaktur', url: 'https://www.sitzfest.de' },
+  { name: 'mediadee', url: 'https://www.mediadee.de' },
+  { name: 'Steffi und Thomas Fotografie', url: 'https://www.steffiundthomas.com' },
+  { name: 'Beratung Bachhuber', url: 'https://www.beratung-bachhuber.com/' },
+  { name: 'Qnik Papeterie', url: 'https://www.qnik.de/' },
+  { name: 'Sahayoga', url: 'https://sahayoga.de' },
+  { name: 'Lovely Food', url: 'https://lovelyfood-ernaehrung.de/' },
+  { name: 'Frederike Fernández Álvarez', url: 'https://www.frederike-fernandez.com' },
+  { name: 'Wildkräuter Wellness Gina Leonhard', url: 'https://xn--wildkruterwellness-qtb.de/' },
+  { name: 'Kami Label', url: 'https://www.kami-label.de' },
+  { name: 'Studio Parla Erfurt', url: 'https://studioparla.de/' },
+  { name: 'Karma Kinder Indien e.V.', url: 'http://im-sonnenstrahl.de/karma-kinder-indien-e-v/' },
+];
+---
+
+<Base
+  title="Jobs und Partner"
+  description="Mitarbeiten in der YogaLounge Erfurt: Wir suchen Yogalehrende und eine Massagetherapeutin oder einen Massagetherapeuten. Dazu Kooperationen und Partner."
+>
+  <PageHero
+    label="Zusammenarbeit"
+    title="Mach mit"
+    lead="Wir suchen Yogalehrende und Massagetherapeut*innen, die gut zu uns passen. Und wir arbeiten gern mit Marken und Menschen zusammen, die ähnlich ticken."
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cols" id="yogalehrende">
+        <div class="cols__head">
+          <p class="label">Wir suchen</p>
+          <h2>Yogalehrer*innen</h2>
+        </div>
+        <div class="cols__body">
+          <p class="lead">
+            Bei uns wird Yoga ohne Leistungsdruck geübt. Wir suchen Lehrende, die das genauso sehen und unsere
+            Teilnehmenden mit Herz und Aufmerksamkeit durch die Stunde führen.
+          </p>
+          <h3>Was du mitbringst</h3>
+          <ul class="dots">
+            <li>Eine abgeschlossene Yogalehrer*innen-Ausbildung mit mindestens 200 Stunden</li>
+            <li>Unterrichtserfahrung, egal auf welchem Level</li>
+            <li>Offenheit für unterschiedliche Bedürfnisse</li>
+            <li>Zuverlässigkeit, Herzlichkeit und Freude an Teamarbeit</li>
+          </ul>
+          <h3>Was wir bieten</h3>
+          <ul class="dots">
+            <li>Schöne Räume und alles Equipment, das du brauchst</li>
+            <li>Teilnehmende, die Yoga lieben</li>
+            <li>Faire, transparente Vergütung</li>
+            <li>Raum für deinen eigenen Stil</li>
+            <li>Unterstützung auf dem Weg zur ZPP-Zertifizierung</li>
+          </ul>
+          <p>
+            Ob als Nebentätigkeit oder voll freiberuflich: Du bringst dich so ein, wie es für dich passt. Schreib an{' '}
+            <a href={`mailto:${site.email}?subject=Bewerbung%20Yogalehrer*in`}>{site.email}</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols" id="massage">
+        <div class="cols__head">
+          <p class="label">Wir suchen</p>
+          <h2>Massagetherapeut*in</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Für unseren Massageraum suchen wir eine selbstständige Massagetherapeutin oder einen selbstständigen
+            Massagetherapeuten für eine langfristige Zusammenarbeit. Du bietest regelmäßig Termine bei uns an und bleibst
+            selbstständig.
+          </p>
+          <ul class="dots">
+            <li>Ein ruhiger, schöner Raum für deine Massagen</li>
+            <li>Eine bestehende Community rund um Yoga und Wohlbefinden</li>
+            <li>Eine unkomplizierte Zusammenarbeit</li>
+          </ul>
+          <p>
+            Du hast eine fundierte Ausbildung, arbeitest zuverlässig und passt menschlich zu uns? Schreib uns ein paar
+            Zeilen über dich, deine Qualifikation und deine Massagen an{' '}
+            <a href={`mailto:${site.email}?subject=Massageraum`}>{site.email}</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols" id="kooperation">
+        <div class="cols__head">
+          <p class="label">Für Marken</p>
+          <h2>Kooperationen</h2>
+        </div>
+        <div class="cols__body">
+          <p>
+            Rund 2.500 aktive Kundinnen und Kunden kommen zu uns, unser Instagram-Profil wird etwa 42.000 Mal im Monat
+            aufgerufen. Für Workshops, Events und Goodie-Bags suchen wir hochwertige Produkte, die zu uns passen:
+            ätherische Öle und Düfte, Selfcare-Artikel, Räucherwerk, Ayurveda-Produkte, Yoga- und Coaching-Tools oder
+            kleinen Schmuck.
+          </p>
+          <p>
+            Möglich sind Produktproben und Giveaways, Affiliate-Links und Rabattcodes, Präsentation im Studio, im Newsletter
+            und auf Social Media oder die Einbindung in Workshops und Retreats. Schreib uns an{' '}
+            <a href={`mailto:${site.email}?subject=Kooperation`}>{site.email}</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="cols" id="partner">
+        <div class="cols__head">
+          <p class="label">Partner</p>
+          <h2>Mit wem wir arbeiten</h2>
+        </div>
+        <div class="cols__body">
+          <ul class="partner">
+            {
+              partner.map((p) => (
+                <li>
+                  <a href={p.url} target="_blank" rel="noopener">
+                    {p.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <h3>Rabatte bei Marken</h3>
+          <p class="muted">
+            Die folgenden Links sind Affiliate-Links. Kaufst du darüber ein, bekommen wir eine kleine Provision. Für dich
+            ändert sich am Preis nichts.
+          </p>
+          <ul class="dots">
+            <li>
+              <a href="https://noneedformore.com/?ref=mscqmpsd&utm_source=affiliate" target="_blank" rel="noopener sponsored">noneedformore</a>:
+              Yoga-Equipment, 10 % Rabatt mit dem Code <strong>YOGALOUNGE10%</strong>
+            </li>
+            <li>
+              <a href="https://studiolietz.com/affiliate?sca_ref=10692940.enod6DVKkZPY" target="_blank" rel="noopener sponsored">Studio Lietz</a>:
+              Yoga- und Meditationszubehör, 10 % Vorteil über diesen Link (außer Bücher, Sale und Gutscheine)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .partner {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--linie);
+  }
+  .partner li {
+    border-bottom: 1px solid var(--linie);
+  }
+  .partner a {
+    display: block;
+    padding-block: 0.7rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .partner a:hover {
+    text-decoration: underline;
+  }
+</style>

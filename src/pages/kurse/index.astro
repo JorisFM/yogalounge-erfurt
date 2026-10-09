@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import WeekBoard from '../../components/WeekBoard.astro';
+import CourseGroups from '../../components/CourseGroups.astro';
+import { bsport } from '../../data/site';
+import { u } from '../../lib/url';
+---
+
+<Base
+  title="Kurse und Wochenplan"
+  description="Alle Yogakurse der YogaLounge Erfurt im Wochenüberblick: Yoga für Anfänger, Hatha, Vinyasa, Schwangerschaftsyoga, Yoga mit Baby, Kinderyoga und mehr."
+>
+  <PageHero
+    label="Kurse"
+    title="Die Woche in der YogaLounge"
+    lead="Unsere Klassen laufen jede Woche zur gleichen Zeit. Die erste Stunde ist kostenlos, danach buchst du mit Einzelticket, Karte oder Mitgliedschaft."
+  >
+    <div class="btn-row">
+      <a class="btn" href={bsport.kalender} target="_blank" rel="noopener">
+        Im Kursplan buchen <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn--ghost" href={u('/preise/')}>Preise</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--tight" aria-labelledby="plan-titel">
+    <div class="wrap">
+      <div class="plan-head">
+        <h2 id="plan-titel" class="plan-title">Wochenplan</h2>
+        <p class="muted">
+          Das ist der reguläre Rhythmus. Ausfälle, Vertretungen und freie Plätze siehst du tagesaktuell im{' '}
+          <a class="textlink" href={bsport.kalender} target="_blank" rel="noopener">Kursplan bei bsport</a>.
+        </p>
+      </div>
+      <WeekBoard variant="woche" />
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-labelledby="alle-titel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Alle Angebote</p>
+        <h2 id="alle-titel">Welche Klasse passt zu dir?</h2>
+        <p class="lead">
+          Wenn du unsicher bist, fang mit Yoga für Anfänger an. Oder ruf Kathrin an, sie hilft dir bei der Wahl.
+        </p>
+      </div>
+      <CourseGroups />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .plan-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-block-end: 1.5rem;
+  }
+  .plan-title {
+    font-size: var(--step-3);
+  }
+  .plan-head p {
+    max-width: 36rem;
+    font-size: 1rem;
+  }
+</style>
